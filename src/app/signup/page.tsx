@@ -2,7 +2,7 @@
 
 import { useActionState, useState } from "react";
 import { Eye, EyeOff } from "lucide-react"; // Import ikon dari lucide-react
-import signupAction from "./signUpAction";
+import { signupAction } from "../server/actions/users";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";

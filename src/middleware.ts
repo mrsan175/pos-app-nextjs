@@ -13,8 +13,9 @@ export async function middleware(request: NextRequest) {
   const jwt = cookie.value;
 
   try {
-    const { payload } = await jose.jwtVerify(jwt, secret, {});
-    console.log(payload);
+    // const { payload } = await jose.jwtVerify(jwt, secret, {});
+    // console.log(payload);
+    await jose.jwtVerify(jwt, secret, {});
   } catch {
     return NextResponse.redirect(new URL("/", request.url));
   }

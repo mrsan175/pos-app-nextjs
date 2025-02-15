@@ -12,7 +12,7 @@ export async function POST(request: Request) {
   // 🔹 Validate username
   if (!validateUsername(username)) {
     return Response.json(
-      {
+      { 
         error:
           "*Username must be between 3-16 characters (letters, numbers, and underscores only).",
       },

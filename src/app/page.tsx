@@ -1,17 +1,27 @@
 "use client";
 
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import Link from "next/link"; // Import Link dari Next.js
 import { Eye, EyeOff } from "lucide-react";
-import loginAction from "./loginAction";
+import { loginAction } from "@/app/server/actions/users";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
-  const [error, formAction, isPending] = useActionState(loginAction, undefined);
+  const [state, formAction, isPending] = useActionState(
+    loginAction,
+    undefined
+  ) as [
+    { success: boolean; message: string } | undefined,
+    (formData: FormData) => void,
+    boolean
+  ];
   const [showPassword, setShowPassword] = useState(false);
+  const router = useRouter();
 
   const [formData, setFormData] = useState({
     identifier: "",
@@ -21,6 +31,15 @@ export default function Login() {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  useEffect(() => {
+    if (state && state.success) {
+      toast.success(state.message, {
+        duration: 1000,
+      });
+      router.push("/dashboard");
+    }
+  });
 
   return (
     <div className="flex justify-center items-center min-h-screen bg-gray-100">
@@ -68,8 +87,10 @@ export default function Login() {
               {isPending ? "Loading..." : "Login"}
             </Button>
           </form>
-          {error && (
-            <p className="text-red-500 text-sm mt-2 text-center">{error}</p>
+          {state && !state.success && (
+            <p className="text-red-500 text-sm mt-2 text-center">
+              {state.message}
+            </p>
           )}
           <p className="text-sm text-center text-gray-600 mt-4">
             Don&apos;t have an account?{" "}
