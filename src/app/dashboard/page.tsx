@@ -1,9 +1,3 @@
-
-
-export default function Page() {
-  return (
-    <div>
-        Hello
-    </div>
-  )
+export default function Dashboard() {
+  return <div>Hello Buddy!</div>;
 }
