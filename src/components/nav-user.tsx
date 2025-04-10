@@ -78,7 +78,7 @@ export function NavUser({
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuItem>
+              {/* <DropdownMenuItem>
                 <Sparkles />
                 Upgrade to Pro
               </DropdownMenuItem>
@@ -92,7 +92,7 @@ export function NavUser({
               <DropdownMenuItem>
                 <CreditCard />
                 Billing
-              </DropdownMenuItem>
+              </DropdownMenuItem> */}
               <DropdownMenuItem>
                 <Bell />
                 Notifications
